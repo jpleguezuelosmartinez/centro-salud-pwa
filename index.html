@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Centro de Salud Pinto</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <meta name="theme-color" content="#1976d2">
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").then(() => {
+          console.log("Service Worker registrado");
+        });
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>Centro de Salud Universitario Pinto</h1>
+  <p>Consulta nuestras actividades de promoción y prevención de la salud.</p>
+  <button onclick="subscribe()">Activar notificaciones</button>
+
+  <script>
+    async function subscribe() {
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        new Notification("Gracias por suscribirte a nuestras notificaciones.");
+      } else {
+        alert("No se han podido activar las notificaciones.");
+      }
+    }
+  </script>
+</body>
+</html>
